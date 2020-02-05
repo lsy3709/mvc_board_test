@@ -6,13 +6,12 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.sql.DataSource;
+
+import org.apache.catalina.Context;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 import com.javalec.ex.dto.BDto;
-
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class BDao {
 
@@ -22,8 +21,8 @@ public class BDao {
 		// TODO Auto-generated constructor stub
 		
 	try {
-		Context context = new InitialContext();
-		dataSource = (DataSource)context.lookup("java:comp/env/jdbc/orcl");
+		Context context = (Context) new InitialContext();
+		dataSource = (DataSource)((InitialContext) context).lookup("java:comp/env/jdbc/orcl");
 	} catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();
@@ -102,6 +101,39 @@ public class BDao {
 		return dtos;
 	}
 	
+	public void modify(String bId, String bName, String bTitle, String bContent) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String query = "update mvc_board set bName = ?, bTitle = ? , bContent = ? where bId =?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bName);
+			pstmt.setString(2, bTitle);
+			pstmt.setString(3, bContent);
+			pstmt.setInt(4, Integer.parseInt(bId));
+			int rn = pstmt.executeUpdate();
+							
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null)pstmt.close();
+				if(conn != null)conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	public void delete(String bId) {
+		
+		
+	}
 	
 }
 
