@@ -5,17 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판</title>
 </head>
 <body>
-
+<h1>list.jsp</h1>
 <table width="500" cellpadding ="0" cellspacing="0" border="1">
 <tr>
-<td>번호</td>
-<td>이름</td>
-<td>제목</td>
-<td>날짜</td>
-<td>히트</td>
+<th>번호</th>
+<th>이름</th>
+<th>제목</th>
+<th>날짜</th>
+<th>히트</th>
 </tr>
 <c:forEach items="${list}" var="dto">
 <tr>

@@ -19,6 +19,19 @@ create sequence mvc_board_seq;
 
 insert into mvc_board (bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, 'abcd' , 'is title' , 'is content' , sysdate , mvc_board_seq.currval, 0 , 0 , 0);
 
+DBCP 설정 참고, servers->context
+
+<Resource auth="Container"
+    name = "jdbc/orcl"
+    driverClassName = "oracle.jdbc.driver.OracleDriver"
+    url = "jdbc:oracle:thin:@1.252.62.38:11521:orcl"
+    username = "hr2"
+    password = "1234"
+    type = "javax.sql.DataSource"
+    maxActive = "50"
+    maxWait = "5000"
+    testOnBorrow="true" /> 
+
 
 FrontController 만들기
 1.

@@ -14,9 +14,12 @@ public class BDto {
 	private int bStep;
 	private int bIndent;
 	
+	public BDto() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public BDto(int bId, String bName, String bTitle, String bContent, Timestamp bDate, int bHit, int bGroup, int bStep,
 			int bIndent) {
-		super();
 		this.bId = bId;
 		this.bName = bName;
 		this.bTitle = bTitle;
